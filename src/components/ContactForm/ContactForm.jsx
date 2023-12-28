@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-import ButtonPrimary from '../ButtonPrimary/ButtonPrimary';
 import styles from './ContactForm.module.scss';
 
 import AOS from 'aos';
