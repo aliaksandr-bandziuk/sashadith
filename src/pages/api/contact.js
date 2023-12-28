@@ -4,7 +4,7 @@ import nodemailer from 'nodemailer';
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     try {
-      const { name, email, message } = req.body;
+      const { name, phone, email, subject, message } = req.body;
 
       // Создаем транспорт для отправки почты (замените данными вашего почтового сервера)
       const transporter = nodemailer.createTransport({
@@ -12,17 +12,17 @@ export default async function handler(req, res) {
         port: 465, // Порт для SSL
         secure: true, // Использовать SSL
         auth: {
-          user: 'bandziuk.aliaksandr@gmail.com', // Ваш адрес электронной почты Gmail
-          pass: 'jwjmuuabjwmsheca', // Ваш пароль приложения Gmail
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASSWORD,
         },
       });
 
       // Опции для отправки письма
       const mailOptions = {
         from: email,
-        to: 'bandziuk.aliaksandr@gmail.com',
-        subject: `New message from website Sasha Dith`,
-        text: `${message}\n\nContact Details:\nName: ${name}\nEmail: ${email}`,
+        to: process.env.EMAIL_USER,
+        subject: `New message from ${name} - ${subject}`,
+        text: `${message}\n\nContact Details:\nName: ${name}\nPhone: ${phone}\nEmail: ${email}`,
       };
 
       // Отправляем письмо
